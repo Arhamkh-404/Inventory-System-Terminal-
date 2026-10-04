@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int prices[5]={100,200,300,400,500};
+    int stocks[5]={10,20,30,40,50};
+    int bill=0;
+    int* ptr1=&prices[0];
+    int* ptr2=&stocks[0];
+    for(int i=0;i<5;i++){
+        cout<<"Price of Item "<<i+1<<"= "<<*(ptr1+i)<<"Rs.\t"<<" Stock Qty: "<<*(ptr2+i);
+        cout<<"\n";
+    }
+int itemChoice, qty;
+string buy_another;
+while (true){
+    cout << "Which item number? ";
+    cin >> itemChoice;
+    cout << "How many units? ";
+    cin >> qty;
+    int index = itemChoice - 1;
+    if(*(ptr2+index) >= qty){
+    cout << "Sale approved.\n";
+    bill+=*(ptr1+index)*qty;
+    *(ptr2+index) = *(ptr2+index) - qty;   // actually reduce the stock
+    cout << "Remaining stock: " << *(ptr2+index)<<"\n";
+    for(int i=0;i<5;i++){
+        cout<<"Price of Item "<<i+1<<"= "<<*(ptr1+i)<<"Rs.\t"<<" Stock Qty: "<<*(ptr2+i);
+        cout<<"\n";
+    }
+}
+else{
+    cout << "Not enough stock.";
+}
+cout<<"Do You want to buy another item: ";
+cin>>buy_another;
+if(buy_another=="NO" ||buy_another=="No" || buy_another=="no"){
+    break;
+
+}
+
+
+}
+cout<<"Your Total Bill is: "<<bill<<"Rs.";
+
+
+    return 0;
+}
